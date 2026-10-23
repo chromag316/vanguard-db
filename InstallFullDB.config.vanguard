@@ -1,0 +1,44 @@
+####################################################################################################
+# Vanguard template for InstallFullDB.sh
+#
+#   cp InstallFullDB.config.vanguard InstallFullDB.config   # InstallFullDB.config is gitignored
+#   then set MYSQL_PASSWORD in the copy only, never in this template.
+#
+# Assumes the Vanguard layout: src/vanguard-db (here), src/vanguard-core, server/mysql.
+# Run the vanguard-core CMake configure step first (BUILD_PLAYERBOTS=ON), so that
+# CORE_PATH/src/modules/PlayerBots/sql exists for PLAYERBOTS_DB.
+####################################################################################################
+
+## Host and port of the mangos database
+MYSQL_HOST="127.0.0.1"
+MYSQL_PORT="3306"
+
+## Account used for the install (needs CREATE/ALTER/DROP on the four schemas)
+MYSQL_USERNAME="mangos"
+MYSQL_PASSWORD=""
+
+## Accounts created by -CreateAllDBandUser stay localhost-only
+MYSQL_USERIP="localhost"
+
+## Database names
+WORLD_DB_NAME="classicmangos"
+REALM_DB_NAME="classicrealmd"
+CHAR_DB_NAME="classiccharacters"
+LOGS_DB_NAME="classiclogs"
+
+## Bundled portable MySQL client
+MYSQL_PATH="../../server/mysql/bin/mysql.exe"
+MYSQL_DUMP_PATH="../../server/mysql/bin"
+
+## Core checkout (vanguard branch)
+CORE_PATH="../vanguard-core"
+
+LOCALES="YES"
+FORCE_WAIT="YES"
+DEV_UPDATES="NO"
+
+## AHBOT is the core AuctionHouseBot, which Vanguard does not build (it uses the playerbots AhBot)
+AHBOT="NO"
+
+## Playerbots tables (ai_playerbot_*, ahbot_*)
+PLAYERBOTS_DB="YES"
