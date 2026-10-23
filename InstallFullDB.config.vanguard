@@ -42,3 +42,6 @@ AHBOT="NO"
 
 ## Playerbots tables (ai_playerbot_*, ahbot_*)
 PLAYERBOTS_DB="YES"
+
+## Achievements module SQL (world data; character tables only if missing) and vanguard/world fixes
+VANGUARD="YES"

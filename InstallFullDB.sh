@@ -66,6 +66,7 @@ LOCALES_DEFAULT="YES"
 DEV_UPDATES_DEFAULT="NO"
 AHBOT_DEFAULT="NO"
 PLAYERBOTS_DB_DEFAULT="NO"
+VANGUARD_DEFAULT="NO"
 FORCE_WAIT_DEFAULT="YES"
 
 # variables assigned and read from $CONFIG_FILE
@@ -85,6 +86,7 @@ MYSQL_DUMP_PATH="${MYSQL_DUMP_PATH_DEFAULT}"
 LOCALES="${LOCALES_DEFAULT}"
 DEV_UPDATES="${DEV_UPDATES_DEFAULT}"
 PLAYERBOTS_DB="${PLAYERBOTS_DB_DEFAULT}"
+VANGUARD="${VANGUARD_DEFAULT}"
 AHBOT="${AHBOT_DEFAULT}"
 FORCE_WAIT="${FORCE_WAIT_DEFAULT}"
 
@@ -304,6 +306,10 @@ function save_settings()
   allsettings+=("## Define if the 'src/modules/PlayerBots/sql' directory for processing development SQL files needs to be used")
   allsettings+=("##   Set the variable to \"YES\" to use the playerbots directory")
   allsettings+=("PLAYERBOTS_DB=\"$PLAYERBOTS_DB\"")
+  allsettings+=("")
+  allsettings+=("## Vanguard: apply the achievements module SQL and the 'vanguard/world' fixes")
+  allsettings+=("##   Set the variable to \"YES\" for a Vanguard server")
+  allsettings+=("VANGUARD=\"$VANGUARD\"")
   allsettings+=("")
   allsettings+=("# Enjoy using the tool")
 
@@ -1668,6 +1674,67 @@ function apply_full_content_db()
     return
   fi
 
+  # Vanguard: achievements world data and Vanguard fixes, applied last
+  if ! apply_vanguard_world; then
+    false
+    return
+  fi
+
+  true
+}
+
+# Vanguard: achievements module world data, then vanguard/world/*.sql (all safe to re-run)
+function apply_vanguard_world()
+{
+  if [ "$VANGUARD" != "YES" ]; then
+    true
+    return
+  fi
+
+  echo "> Trying to apply Vanguard world data..."
+  for UPDATEFILE in ${CORE_PATH}/src/modules/achievements/sql/install/world/*.sql "${ADDITIONAL_PATH}"vanguard/world/*.sql; do
+    if [ -e "$UPDATEFILE" ]; then
+      local fName=$(basename "$UPDATEFILE")
+      if ! execute_sql_file "$WORLD_DB_NAME" "$UPDATEFILE" "  - Applying $fName"; then
+        false
+        return
+      fi
+    fi
+  done
+  echo
+  true
+}
+
+# Vanguard: achievements module character tables. The script drops and recreates
+# them, so only run it when they don't exist yet (keeps player progress).
+function apply_vanguard_characters()
+{
+  if [ "$VANGUARD" != "YES" ]; then
+    true
+    return
+  fi
+
+  if ! execute_sql_command "$CHAR_DB_NAME" "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = 'character_achievement';"; then
+    false
+    return
+  fi
+  # Windows mysql.exe ends lines with \r
+  if [[ "${MYSQL_ERROR//$'\r'/}" != "0" ]]; then
+    echo "> Achievements character tables already exist, skipping"
+    true
+    return
+  fi
+
+  local charFile="${CORE_PATH}/src/modules/achievements/sql/install/characters/characters.sql"
+  if [ ! -e "$charFile" ]; then
+    echo "> Achievements characters SQL not found at $charFile (configure vanguard-core first)"
+    false
+    return
+  fi
+  if ! execute_sql_file "$CHAR_DB_NAME" "$charFile" "> Applying achievements character tables"; then
+    false
+    return
+  fi
   true
 }
 
@@ -1951,6 +2018,10 @@ function create_all_databases_and_user()
   fi
 
   if ! create_and_fill_playerbots_db; then
+    return
+  fi
+
+  if ! apply_vanguard_characters; then
     return
   fi
 
@@ -2812,6 +2883,11 @@ function auto_script_create_all()
   fi
 
   if ! create_and_fill_playerbots_db; then
+    false
+    return
+  fi
+
+  if ! apply_vanguard_characters; then
     false
     return
   fi
