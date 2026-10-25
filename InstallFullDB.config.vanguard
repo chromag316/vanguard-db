@@ -28,7 +28,7 @@ LOGS_DB_NAME="classiclogs"
 
 ## Bundled portable MySQL client
 MYSQL_PATH="../../server/mysql/bin/mysql.exe"
-MYSQL_DUMP_PATH="../../server/mysql/bin"
+MYSQL_DUMP_PATH="../../server/mysql/bin/mysqldump.exe"
 
 ## Core checkout (vanguard branch)
 CORE_PATH="../vanguard-core"
