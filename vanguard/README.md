@@ -12,6 +12,7 @@ Every file can be run again safely. Keep the numbering: files run in name order.
 | `0003_spell_proc_event_higher_ranks.sql` | 39 non-first-rank `spell_proc_event` rows the core ignores |
 | `0004_zeliek_enrage_spell_list.sql` | WotLK spells 57376/57377 in Sir Zeliek Enrage's spell list |
 | `0005_script_texts_missing_broadcast.sql` | 6 `script_texts` pointing at missing `broadcast_text` rows |
+| `0006_sw_auberdine_boat.sql` | The Stormwind - Auberdine boat from Turtle WoW; needs the DBCs from the Vanguard client patch |
 
 ## Applying to an existing server
 
