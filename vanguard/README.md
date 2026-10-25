@@ -13,6 +13,7 @@ Every file can be run again safely. Keep the numbering: files run in name order.
 | `0004_zeliek_enrage_spell_list.sql` | WotLK spells 57376/57377 in Sir Zeliek Enrage's spell list |
 | `0005_script_texts_missing_broadcast.sql` | 6 `script_texts` pointing at missing `broadcast_text` rows |
 | `0006_sw_auberdine_boat.sql` | The Stormwind - Auberdine boat from Turtle WoW; needs the DBCs from the Vanguard client patch |
+| `0007_menethil_boat_north_pier.sql` | Moves the Menethil - Auberdine boat to the northern Auberdine pier (path 968 from the client patch) |
 
 ## Applying to an existing server
 
