@@ -14,6 +14,7 @@ Every file can be run again safely. Keep the numbering: files run in name order.
 | `0005_script_texts_missing_broadcast.sql` | 6 `script_texts` pointing at missing `broadcast_text` rows |
 | `0006_sw_auberdine_boat.sql` | The Stormwind - Auberdine boat from Turtle WoW; needs the DBCs from the Vanguard client patch |
 | `0007_auberdine_piers.sql` | Auberdine piers: Menethil boat to the north pier (path 968), Moonspray to the west pier (path 969); both paths come from the client patch |
+| `0008_ship_bells.sql` | A bell (sound 5495) when a ship or zeppelin docks and 10 s before it leaves; needs the core's transport events |
 
 ## Applying to an existing server
 
