@@ -15,6 +15,7 @@ Every file can be run again safely. Keep the numbering: files run in name order.
 | `0006_sw_auberdine_boat.sql` | The Stormwind - Auberdine boat from Turtle WoW; needs the DBCs from the Vanguard client patch |
 | `0007_auberdine_piers.sql` | Auberdine piers: Menethil boat to the north pier (path 968), Moonspray to the west pier (path 969); both paths come from the client patch |
 | `0008_ship_bells.sql` | A bell (sound 5495) when a ship or zeppelin docks and 10 s before it leaves; needs the core's transport events |
+| `0009_menethil_boat_southshore.sql` | The Menethil boat also calls at Southshore (Auberdine - Menethil - Southshore - Menethil); period of the longer path 968 from the client patch |
 
 ## Applying to an existing server
 
