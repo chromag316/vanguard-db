@@ -16,9 +16,9 @@ Every file can be run again safely. Keep the numbering: files run in name order.
 | `0007_auberdine_piers.sql` | Auberdine piers: Menethil boat to the north pier (path 968), Moonspray to the west pier (path 969); both paths come from the client patch |
 | `0008_ship_bells.sql` | A bell (sound 5495) when a ship or zeppelin docks and 10 s before it leaves; needs the core's transport events |
 | `0009_menethil_boat_southshore.sql` | The Menethil boat also calls at Southshore (Auberdine - Menethil - Southshore - Menethil); period of the longer path 968 from the client patch |
-| `0010_gambit_catalog.sql` | The gambit catalog: condition and action ids, names and parameter ranges, read by the playerbots fork and the web editor |
+| `0010_gambit_catalog.sql` | The gambit catalog: condition and action ids, names, parameter ranges and self-only actions, read by the playerbots fork and the web editor (recreated on every run) |
 
-`characters/` holds tables for the characters DB, such as `0001_gambits.sql` (companion gambit slots). They are `CREATE TABLE IF NOT EXISTS`, so they never touch existing rows.
+`characters/` holds tables for the characters DB, such as `0001_gambits.sql` (companion gambit slots) and `0002_gambit_defaults.sql` (class default gambits, seeded once per class). They are `CREATE TABLE IF NOT EXISTS`, so they never touch existing rows.
 
 ## Applying to an existing server
 
