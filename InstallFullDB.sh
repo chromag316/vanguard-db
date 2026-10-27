@@ -1707,6 +1707,7 @@ function apply_vanguard_world()
 
 # Vanguard: achievements module character tables. The script drops and recreates
 # them, so only run it when they don't exist yet (keeps player progress).
+# Then vanguard/characters/*.sql, every time.
 function apply_vanguard_characters()
 {
   if [ "$VANGUARD" != "YES" ]; then
@@ -1721,7 +1722,7 @@ function apply_vanguard_characters()
   # Windows mysql.exe ends lines with \r
   if [[ "${MYSQL_ERROR//$'\r'/}" != "0" ]]; then
     echo "> Achievements character tables already exist, skipping"
-    true
+    apply_vanguard_characters_sql
     return
   fi
 
@@ -1735,6 +1736,21 @@ function apply_vanguard_characters()
     false
     return
   fi
+  apply_vanguard_characters_sql
+}
+
+# Vanguard: vanguard/characters/*.sql (CREATE TABLE IF NOT EXISTS, safe to re-run)
+function apply_vanguard_characters_sql()
+{
+  for UPDATEFILE in "${ADDITIONAL_PATH}"vanguard/characters/*.sql; do
+    if [ -e "$UPDATEFILE" ]; then
+      local fName=$(basename "$UPDATEFILE")
+      if ! execute_sql_file "$CHAR_DB_NAME" "$UPDATEFILE" "  - Applying $fName"; then
+        false
+        return
+      fi
+    fi
+  done
   true
 }
 
