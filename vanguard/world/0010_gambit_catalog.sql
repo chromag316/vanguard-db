@@ -51,9 +51,9 @@ INSERT INTO `vanguard_gambit_condition` (`id`, `name`, `description`, `param_min
 (26, 'Foe: HP > X%',                 'An enemy whose health is above X%.', 1, 99, 260),
 (27, 'Foe: without the action\'s aura', 'An enemy that does not have the action\'s spell on it yet (for damage over time and debuffs).', 0, 0, 270);
 
+-- Ids 4 (Eat food) and 5 (Drink) were removed in 0.2.6: the normal bot AI eats and drinks.
 INSERT INTO `vanguard_gambit_action` (`id`, `name`, `description`, `needs_spell`, `self_only`, `sort`) VALUES
-(1, 'Cast spell',           'Cast a spell the companion knows on the target, at the highest rank it has. Out of range, the companion moves closer first.', 1, 0, 10),
-(2, 'Attack',               'Attack the target.', 0, 0, 20),
-(3, 'Move to party leader', 'Move back to the party leader.', 0, 0, 30),
-(4, 'Eat food',             'Out of combat: eat food from the bags.', 0, 1, 40),
-(5, 'Drink',                'Out of combat: drink from the bags.', 0, 1, 50);
+(1, 'Cast spell',                'Cast a spell the companion knows on the target, at the highest rank it has. Out of range, the companion moves closer first.', 1, 0, 10),
+(6, 'Cast spell (exact rank)',   'Cast exactly this rank of a spell the companion knows, for example a lower rank of a heal to save mana. Out of range, the companion moves closer first.', 1, 0, 15),
+(2, 'Attack',                    'Attack the target.', 0, 0, 20),
+(3, 'Move to party leader',      'Move back to the party leader.', 0, 0, 30);
