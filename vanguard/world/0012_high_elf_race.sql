@@ -6,17 +6,17 @@
 -- The race itself comes from the merged DBCs (devkit/content/high_elves/build_patch.py
 -- writes ChrRaces, CharBaseInfo, CharStartOutfit, SkillRaceClassInfo and the rest into
 -- server/mangos/dbc) and RACE_HIGH_ELF in the core.
--- Start position: Northshire Abbey for now, until Turtle's Thalassian Highlands are ported.
+-- Start position: Turtle's, in the Thalassian Highlands (world 0013 has the zone).
 -- Safe to re-run.
 
 DELETE FROM `playercreateinfo` WHERE `race` = 10;
 INSERT INTO `playercreateinfo` (`race`, `class`, `map`, `zone`, `position_x`, `position_y`, `position_z`, `orientation`) VALUES
-(10, 1, 0, 12, -8949.95, -132.493, 83.5312, 0),
-(10, 2, 0, 12, -8949.95, -132.493, 83.5312, 0),
-(10, 3, 0, 12, -8949.95, -132.493, 83.5312, 0),
-(10, 4, 0, 12, -8949.95, -132.493, 83.5312, 0),
-(10, 5, 0, 12, -8949.95, -132.493, 83.5312, 0),
-(10, 8, 0, 12, -8949.95, -132.493, 83.5312, 0);
+(10, 1, 0, 5225, 3212.63, -2501.44, 111.71, 0.79),
+(10, 2, 0, 5225, 3212.63, -2501.44, 111.71, 0.79),
+(10, 3, 0, 5225, 3212.63, -2501.44, 111.71, 0.79),
+(10, 4, 0, 5225, 3212.63, -2501.44, 111.71, 0.79),
+(10, 5, 0, 5225, 3212.63, -2501.44, 111.71, 0.79),
+(10, 8, 0, 5225, 3212.63, -2501.44, 111.71, 0.79);
 
 DELETE FROM `spell_template` WHERE `Id` IN (46021, 46022);
 INSERT INTO `spell_template` (`Id`, `School`, `Category`, `CastUI`, `Dispel`, `Mechanic`, `Attributes`, `AttributesEx`, `AttributesEx2`, `AttributesEx3`, `AttributesEx4`, `Stances`, `StancesNot`, `Targets`, `TargetCreatureType`, `RequiresSpellFocus`, `CasterAuraState`, `TargetAuraState`, `CastingTimeIndex`, `RecoveryTime`, `CategoryRecoveryTime`, `InterruptFlags`, `AuraInterruptFlags`, `ChannelInterruptFlags`, `ProcFlags`, `ProcChance`, `ProcCharges`, `MaxLevel`, `BaseLevel`, `SpellLevel`, `DurationIndex`, `PowerType`, `ManaCost`, `ManaCostPerlevel`, `ManaPerSecond`, `ManaPerSecondPerLevel`, `RangeIndex`, `Speed`, `ModalNextSpell`, `StackAmount`, `Totem1`, `Totem2`, `Reagent1`, `Reagent2`, `Reagent3`, `Reagent4`, `Reagent5`, `Reagent6`, `Reagent7`, `Reagent8`, `ReagentCount1`, `ReagentCount2`, `ReagentCount3`, `ReagentCount4`, `ReagentCount5`, `ReagentCount6`, `ReagentCount7`, `ReagentCount8`, `EquippedItemClass`, `EquippedItemSubClassMask`, `EquippedItemInventoryTypeMask`, `Effect1`, `Effect2`, `Effect3`, `EffectDieSides1`, `EffectDieSides2`, `EffectDieSides3`, `EffectBaseDice1`, `EffectBaseDice2`, `EffectBaseDice3`, `EffectDicePerLevel1`, `EffectDicePerLevel2`, `EffectDicePerLevel3`, `EffectRealPointsPerLevel1`, `EffectRealPointsPerLevel2`, `EffectRealPointsPerLevel3`, `EffectBasePoints1`, `EffectBasePoints2`, `EffectBasePoints3`, `EffectMechanic1`, `EffectMechanic2`, `EffectMechanic3`, `EffectImplicitTargetA1`, `EffectImplicitTargetA2`, `EffectImplicitTargetA3`, `EffectImplicitTargetB1`, `EffectImplicitTargetB2`, `EffectImplicitTargetB3`, `EffectRadiusIndex1`, `EffectRadiusIndex2`, `EffectRadiusIndex3`, `EffectApplyAuraName1`, `EffectApplyAuraName2`, `EffectApplyAuraName3`, `EffectAmplitude1`, `EffectAmplitude2`, `EffectAmplitude3`, `EffectMultipleValue1`, `EffectMultipleValue2`, `EffectMultipleValue3`, `EffectChainTarget1`, `EffectChainTarget2`, `EffectChainTarget3`, `EffectItemType1`, `EffectItemType2`, `EffectItemType3`, `EffectMiscValue1`, `EffectMiscValue2`, `EffectMiscValue3`, `EffectTriggerSpell1`, `EffectTriggerSpell2`, `EffectTriggerSpell3`, `EffectPointsPerComboPoint1`, `EffectPointsPerComboPoint2`, `EffectPointsPerComboPoint3`, `SpellVisual`, `SpellIconID`, `ActiveIconID`, `SpellPriority`, `SpellName`, `Rank1`, `ManaCostPercentage`, `StartRecoveryCategory`, `StartRecoveryTime`, `MaxTargetLevel`, `SpellFamilyName`, `SpellFamilyFlags`, `MaxAffectedTargets`, `DmgClass`, `PreventionType`, `StanceBarOrder`, `DmgMultiplier1`, `DmgMultiplier2`, `DmgMultiplier3`, `MinFactionId`, `MinReputation`, `RequiredAuraVision`) VALUES
